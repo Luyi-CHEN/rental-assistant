@@ -16,9 +16,9 @@ import { getNotesByHouseId, addNote, deleteNote } from '@/db/note-repo'
 import { calculateWeightedScore } from '@/lib/score-calculator'
 import { cn, formatPrice } from '@/lib/utils'
 import { PLATFORM_LABELS, STATUS_LABELS, STATUS_FLOW } from '@/types'
-import type { House, Note, NoteType, NoteSentiment } from '@/types'
+import type { House, Note, NoteType, NoteSentiment, NoteImage } from '@/types'
 import {
-  MapPin, Star, ExternalLink, GitCompareArrows, StickyNote,
+  MapPin, Star, Copy, GitCompareArrows, StickyNote,
   Trash2, Plus, Edit3, Tag
 } from 'lucide-react'
 
@@ -63,7 +63,7 @@ export function HouseDetailPage() {
     )
   }
 
-  const handleAddNote = async (data: { type: NoteType; content: string; sentiment: NoteSentiment; sourceUrl: string }) => {
+  const handleAddNote = async (data: { type: NoteType; content: string; sentiment: NoteSentiment; sourceUrl: string; images?: NoteImage[] }) => {
     await addNote({ houseId: house.id, ...data })
     showToast('笔记已添加')
     loadNotes()
@@ -247,15 +247,16 @@ export function HouseDetailPage() {
 
           <div className="flex gap-2">
             {house.sourceUrl && (
-              <a
-                href={house.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={async () => {
+                  await navigator.clipboard.writeText(house.sourceUrl)
+                  showToast('已复制链接')
+                }}
                 className="flex-1 inline-flex items-center justify-center h-11 px-5 rounded-lg border border-input bg-card text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-all active:scale-[0.97]"
               >
-                <ExternalLink className="w-4 h-4 mr-1.5" />
-                查看原链接
-              </a>
+                <Copy className="w-4 h-4 mr-1.5 shrink-0" />
+                <span className="truncate" title={house.sourceUrl}>{house.sourceUrl}</span>
+              </button>
             )}
             <Button
               variant="outline"

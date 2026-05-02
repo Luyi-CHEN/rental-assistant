@@ -1,6 +1,13 @@
 export type NoteType = 'platform_review' | 'visit_feeling' | 'other'
 export type NoteSentiment = 'positive' | 'neutral' | 'negative'
 
+export interface NoteImage {
+  id: string
+  dataUrl: string      // Base64 格式: "data:image/jpeg;base64,..."
+  fileName?: string
+  uploadedAt: string
+}
+
 export interface Note {
   id: string
   houseId: string
@@ -8,6 +15,7 @@ export interface Note {
   content: string
   sentiment: NoteSentiment
   sourceUrl: string
+  images?: NoteImage[]   // 可选，向后兼容
   createdAt: string
 }
 

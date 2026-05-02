@@ -1,5 +1,5 @@
 export type { House, HousePlatform, HouseStatus } from './house'
-export type { Note, NoteType, NoteSentiment } from './note'
+export type { Note, NoteType, NoteSentiment, NoteImage } from './note'
 export type { ScoreDimension, UserConfig } from './score'
 
 export { PLATFORM_LABELS, STATUS_LABELS, STATUS_FLOW } from './house'

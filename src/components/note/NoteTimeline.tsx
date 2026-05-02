@@ -1,7 +1,8 @@
-import { ThumbsUp, Minus, ThumbsDown, ExternalLink, Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { ThumbsUp, Minus, ThumbsDown, ExternalLink, Trash2, X } from 'lucide-react'
 import { cn, formatDate } from '@/lib/utils'
 import { NOTE_TYPE_LABELS } from '@/types'
-import type { Note } from '@/types'
+import type { Note, NoteImage } from '@/types'
 
 interface NoteTimelineProps {
   notes: Note[]
@@ -15,6 +16,8 @@ const SENTIMENT_CONFIG = {
 }
 
 export function NoteTimeline({ notes, onDelete }: NoteTimelineProps) {
+  const [previewImage, setPreviewImage] = useState<NoteImage | null>(null)
+
   if (notes.length === 0) return null
 
   return (
@@ -48,6 +51,20 @@ export function NoteTimeline({ notes, onDelete }: NoteTimelineProps) {
               </div>
             </div>
             <p className="text-sm text-foreground leading-relaxed">{note.content}</p>
+            {note.images && note.images.length > 0 && (
+              <div className="grid grid-cols-3 gap-2 mt-2">
+                {note.images.map(img => (
+                  <button
+                    key={img.id}
+                    type="button"
+                    onClick={() => setPreviewImage(img)}
+                    className="relative aspect-square rounded-lg overflow-hidden bg-secondary"
+                  >
+                    <img src={img.dataUrl} alt={img.fileName || '截图'} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
             {note.sourceUrl && (
               <a
                 href={note.sourceUrl}
@@ -63,6 +80,28 @@ export function NoteTimeline({ notes, onDelete }: NoteTimelineProps) {
           </div>
         )
       })}
+
+      {/* Fullscreen image preview */}
+      {previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setPreviewImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setPreviewImage(null)}
+            className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <img
+            src={previewImage.dataUrl}
+            alt={previewImage.fileName || '截图'}
+            className="max-w-full max-h-full rounded-lg object-contain"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   )
 }
