@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core palette - Warm coral primary with cool slate neutrals */
+    --background: 30 25% 98%;
+    --foreground: 222 20% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 14%;
+    
+    /* Primary - Warm coral orange (home warmth) */
+    --primary: 16 85% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 16 90% 72%;
+    
+    /* Secondary - Soft warm gray */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 20% 14%;
+    
+    /* Muted */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 54%;
+    
+    /* Accent - Light coral tint */
+    --accent: 16 60% 96%;
+    --accent-foreground: 16 85% 42%;
+    
+    /* Destructive */
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Success */
+    --success: 152 60% 44%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Warning */
+    --warning: 38 92% 56%;
+    --warning-foreground: 38 92% 18%;
+    
+    /* Borders & inputs */
+    --border: 220 16% 92%;
+    --input: 220 16% 92%;
+    --ring: 16 85% 58%;
+    --radius: 0.75rem;
+    
+    /* Platform colors */
+    --platform-lianjia: 145 62% 42%;
+    --platform-beike: 24 90% 55%;
+    --platform-ziroom: 210 80% 52%;
+    --platform-anjuke: 0 72% 56%;
+    --platform-xiaohongshu: 348 80% 56%;
+    
+    /* Sentiment colors */
+    --sentiment-positive: 152 60% 44%;
+    --sentiment-neutral: 220 10% 54%;
+    --sentiment-negative: 0 72% 56%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(16 85% 58%), hsl(24 90% 62%));
+    --gradient-warm: linear-gradient(180deg, hsl(30 25% 98%), hsl(20 20% 96%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(30 15% 99%));
+    --gradient-hero: linear-gradient(135deg, hsl(16 85% 58%) 0%, hsl(340 70% 56%) 100%);
+    
+    /* Shadows */
+    --shadow-card: 0 1px 3px hsl(220 20% 14% / 0.04), 0 4px 12px hsl(220 20% 14% / 0.06);
+    --shadow-card-hover: 0 2px 8px hsl(220 20% 14% / 0.06), 0 8px 24px hsl(220 20% 14% / 0.1);
+    --shadow-nav: 0 -1px 12px hsl(220 20% 14% / 0.06);
+    --shadow-sheet: 0 -4px 32px hsl(220 20% 14% / 0.12);
+    --shadow-fab: 0 4px 16px hsl(16 85% 58% / 0.35);
+    
+    /* Transitions */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+  }
+  
+  /* Mobile-first: max width constraint */
+  #root {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    position: relative;
+    background: hsl(var(--background));
+  }
+}
+
+@layer utilities {
+  /* Touch-friendly tap target */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Safe area padding */
+  .safe-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Card press effect */
+  .card-press {
+    transition: var(--transition-fast);
+  }
+  .card-press:active {
+    transform: scale(0.98);
+  }
+  
+  /* Hide scrollbar */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--border)) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+}
