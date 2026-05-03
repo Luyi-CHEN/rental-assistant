@@ -30,6 +30,7 @@ export function HouseForm({ initialData, onSubmit, submitLabel = '保存房源' 
   const [layout, setLayout] = useState(initialData?.layout ?? '')
   const [floor, setFloor] = useState(initialData?.floor ?? '')
   const [orientation, setOrientation] = useState(initialData?.orientation ?? '')
+  const [buildingType, setBuildingType] = useState(initialData?.buildingType ?? '')
   const [platform, setPlatform] = useState<HousePlatform>(initialData?.sourcePlatform ?? 'other')
   const [sourceUrl, setSourceUrl] = useState(initialData?.sourceUrl ?? '')
   const [tags, setTags] = useState<string[]>(initialData?.tags ?? [])
@@ -61,6 +62,7 @@ export function HouseForm({ initialData, onSubmit, submitLabel = '保存房源' 
       layout: layout.trim(),
       floor: floor.trim(),
       orientation: orientation.trim(),
+      buildingType: buildingType.trim() || undefined,
       sourcePlatform: platform,
       sourceUrl: sourceUrl.trim(),
       status: (initialData?.status ?? 'collecting') as HouseStatus,
@@ -109,6 +111,7 @@ export function HouseForm({ initialData, onSubmit, submitLabel = '保存房源' 
           <Input placeholder="楼层 (如6/18层)" value={floor} onChange={e => setFloor(e.target.value)} />
           <Input placeholder="朝向 (如南)" value={orientation} onChange={e => setOrientation(e.target.value)} />
         </div>
+        <Input placeholder="建筑类型 (如高层/公寓/别墅)" value={buildingType} onChange={e => setBuildingType(e.target.value)} />
         <Input placeholder="押金方式 (如押一付三)" value={deposit} onChange={e => setDeposit(e.target.value)} />
       </div>
 

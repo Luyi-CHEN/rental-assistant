@@ -35,6 +35,7 @@ export function EditHousePage() {
     layout: house.layout,
     floor: house.floor,
     orientation: house.orientation,
+    buildingType: house.buildingType,
     sourcePlatform: house.sourcePlatform,
     sourceUrl: house.sourceUrl,
     status: house.status,

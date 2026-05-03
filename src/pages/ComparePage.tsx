@@ -40,6 +40,7 @@ export function ComparePage() {
       { key: 'layout', label: '户型', getValue: h => h.layout || '-' },
       { key: 'floor', label: '楼层', getValue: h => h.floor || '-' },
       { key: 'orientation', label: '朝向', getValue: h => h.orientation || '-' },
+      { key: 'buildingType', label: '建筑类型', getValue: h => h.buildingType || '-' },
       { key: 'deposit', label: '押金', getValue: h => h.deposit || '-' },
       { key: 'district', label: '区域', getValue: h => h.district || '-' },
       {

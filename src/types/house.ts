@@ -12,6 +12,7 @@ export interface House {
   layout: string
   floor: string
   orientation: string
+  buildingType?: string
   sourcePlatform: HousePlatform
   sourceUrl: string
   status: HouseStatus

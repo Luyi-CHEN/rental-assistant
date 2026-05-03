@@ -85,6 +85,7 @@ export function HouseCard({ house, noteCount = 0, className }: HouseCardProps) {
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
             {house.layout && <span>{house.layout}</span>}
             {house.area && <span>{house.area}㎡</span>}
+            {house.buildingType && <span>{house.buildingType}</span>}
             {house.floor && <span>{house.floor}</span>}
           </div>
         </div>

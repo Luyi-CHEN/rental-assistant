@@ -145,6 +145,7 @@ export function HouseDetailPage() {
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             {house.layout && <span>{house.layout}</span>}
             {house.area && <span>{house.area}㎡</span>}
+            {house.buildingType && <span>{house.buildingType}</span>}
             {house.orientation && <span>{house.orientation}向</span>}
             {house.floor && <span>{house.floor}</span>}
           </div>
