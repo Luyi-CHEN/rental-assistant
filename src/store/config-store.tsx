@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import type { UserConfig, ScoreDimension } from '@/types'
 import { DEFAULT_DIMENSIONS } from '@/types'
-import * as configRepo from '@/db/config-repo'
+import * as configRepo from '@/api/config-api'
 
 interface ConfigContextValue {
   config: UserConfig

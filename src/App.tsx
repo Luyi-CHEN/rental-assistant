@@ -7,6 +7,7 @@ import { ToastContainer } from '@/components/ui/toast'
 import { HouseListPage } from '@/pages/HouseListPage'
 import { HouseDetailPage } from '@/pages/HouseDetailPage'
 import { AddHousePage } from '@/pages/AddHousePage'
+import { EditHousePage } from '@/pages/EditHousePage'
 import { ComparePage } from '@/pages/ComparePage'
 import { MapPage } from '@/pages/MapPage'
 import { ProfilePage } from '@/pages/ProfilePage'
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/" element={<HouseListPage />} />
                 <Route path="/house/:id" element={<HouseDetailPage />} />
                 <Route path="/add" element={<AddHousePage />} />
+                <Route path="/edit/:id" element={<EditHousePage />} />
                 <Route path="/compare" element={<ComparePage />} />
                 <Route path="/map" element={<MapPage />} />
                 <Route path="/profile" element={<ProfilePage />} />

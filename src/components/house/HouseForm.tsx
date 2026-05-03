@@ -18,7 +18,7 @@ interface HouseFormProps {
   submitLabel?: string
 }
 
-const PLATFORMS: HousePlatform[] = ['lianjia', 'beike', 'ziroom', 'anjuke', 'woaiwojia', 'xiaohongshu', 'douban', 'other']
+const PLATFORMS: HousePlatform[] = ['lianjia', 'beike', 'ziroom', 'anjuke', 'woaiwojia', 'xiaohongshu', 'douban', 'century21', 'other']
 
 export function HouseForm({ initialData, onSubmit, submitLabel = '保存房源' }: HouseFormProps) {
   const [name, setName] = useState(initialData?.name ?? '')

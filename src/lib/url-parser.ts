@@ -20,6 +20,7 @@ const URL_PLATFORM_PATTERNS: { pattern: RegExp; platform: HousePlatform }[] = [
   { pattern: /xiaohongshu\.com|xhslink\.com/i, platform: 'xiaohongshu' },
   { pattern: /5i5j\.com|woaiwojia/i, platform: 'woaiwojia' },
   { pattern: /douban\.com/i, platform: 'douban' },
+  { pattern: /century21\.com/i, platform: 'century21' },
 ]
 
 // WeChat mini-program name -> platform mapping
@@ -31,6 +32,7 @@ const MINI_PROGRAM_NAMES: { pattern: RegExp; platform: HousePlatform }[] = [
   { pattern: /我爱我家/i, platform: 'woaiwojia' },
   { pattern: /小红书/i, platform: 'xiaohongshu' },
   { pattern: /豆瓣/i, platform: 'douban' },
+  { pattern: /21世纪/i, platform: 'century21' },
 ]
 
 export function detectPlatform(text: string): HousePlatform {
@@ -179,7 +181,7 @@ export function extractPropertyInfo(text: string, result: ParsedLink): void {
       .replace(/「[^」]*」/g, '')
       .trim()
 
-    const platformNames = ['链家', '贝壳', '贝壳找房', '自如', '安居客', '小红书', '我爱我家', '豆瓣']
+    const platformNames = ['链家', '贝壳', '贝壳找房', '自如', '安居客', '小红书', '我爱我家', '豆瓣', '21世纪']
     const segments = cleanText.split(/[·|｜\-–—,，\n]/).map(s => s.trim()).filter(Boolean)
 
     const nameSegment = segments.find(s => {

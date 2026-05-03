@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect } from 'react'
 import type { House, HouseStatus } from '@/types'
-import * as houseRepo from '@/db/house-repo'
+import * as houseRepo from '@/api/house-api'
 
 interface HouseState {
   houses: House[]

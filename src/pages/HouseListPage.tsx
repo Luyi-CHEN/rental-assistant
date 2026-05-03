@@ -8,8 +8,8 @@ import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
 import { cn, formatPrice } from '@/lib/utils'
 import { SORT_OPTIONS, type SortOption } from '@/lib/constants'
-import type { HouseStatus } from '@/types'
-import { getNotesByHouseId } from '@/db/note-repo'
+import type { HouseStatus, HousePlatform } from '@/types'
+import { getNotesByHouseId } from '@/api/note-api'
 import { Home } from 'lucide-react'
 
 export function HouseListPage() {
@@ -21,6 +21,7 @@ export function HouseListPage() {
   const [sortBy, setSortBy] = useState<SortOption>('newest')
   const [showSort, setShowSort] = useState(false)
   const [noteCounts, setNoteCounts] = useState<Record<string, number>>({})
+  const [selectedPlatforms, setSelectedPlatforms] = useState<HousePlatform[]>([])
 
   // Load note counts
   useEffect(() => {
@@ -44,12 +45,25 @@ export function HouseListPage() {
     return counts
   }, [state.houses])
 
+  // Platform counts
+  const platformCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const h of state.houses) {
+      counts[h.sourcePlatform] = (counts[h.sourcePlatform] || 0) + 1
+    }
+    return counts
+  }, [state.houses])
+
   // Filtered + sorted houses
   const filteredHouses = useMemo(() => {
     let result = state.houses
 
     if (statusFilter !== 'all') {
       result = result.filter(h => h.status === statusFilter)
+    }
+
+    if (selectedPlatforms.length > 0) {
+      result = result.filter(h => selectedPlatforms.includes(h.sourcePlatform))
     }
 
     if (searchQuery.trim()) {
@@ -77,7 +91,7 @@ export function HouseListPage() {
     }
 
     return result
-  }, [state.houses, statusFilter, searchQuery, sortBy])
+  }, [state.houses, statusFilter, selectedPlatforms, searchQuery, sortBy])
 
   // Stats
   const avgRent = useMemo(() => {
@@ -135,6 +149,9 @@ export function HouseListPage() {
         activeStatus={statusFilter}
         onStatusChange={setStatusFilter}
         counts={statusCounts}
+        selectedPlatforms={selectedPlatforms}
+        onPlatformsChange={setSelectedPlatforms}
+        platformCounts={platformCounts}
       />
 
       {/* Stats bar */}

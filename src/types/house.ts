@@ -1,4 +1,4 @@
-export type HousePlatform = 'lianjia' | 'beike' | 'ziroom' | 'anjuke' | 'xiaohongshu' | 'woaiwojia' | 'douban' | 'other'
+export type HousePlatform = 'lianjia' | 'beike' | 'ziroom' | 'anjuke' | 'xiaohongshu' | 'woaiwojia' | 'douban' | 'century21' | 'other'
 export type HouseStatus = 'collecting' | 'visited' | 'eliminated' | 'pending_sign' | 'signed'
 
 export interface House {
@@ -33,6 +33,7 @@ export const PLATFORM_LABELS: Record<HousePlatform, string> = {
   xiaohongshu: '小红书',
   woaiwojia: '我爱我家',
   douban: '豆瓣',
+  century21: '21世纪',
   other: '其他',
 }
 
